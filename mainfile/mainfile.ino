@@ -56,6 +56,7 @@ void loop() {
     userScore1++;
 //    onePressed = false;//need to reset the booleans if someone scored
 //    twoPressed = false;
+//    
   } else if(ultraVal1 <= 0 && ultraVal2 > 0) {
     userScore2++;
 //    onePressed = false;//need to reset the booleans if someone scored
