@@ -42,6 +42,8 @@ void loop() {
 //  myMotor->step(1000, FORWARD, SINGLE);
 //  myMotor->step(1000, BACKWARD, SINGLE);
   rotateStepper(1);
+
+  
   //Ultrasonic
   long duration, inches, cm;
   pinMode(ultraOnePingPin, OUTPUT);
