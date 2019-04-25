@@ -1,9 +1,7 @@
-#include <Stepper.h>
-
-//#include <Wire.h>
-//#include <Adafruit_MotorShield.h>
-//Adafruit_MotorShield AFMS = Adafruit_MotorShield();
-//Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
+Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
 
 int forcePortOne = A1;
 int forcePortTwo = A2;
@@ -26,10 +24,8 @@ int winner = 0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(12, OUTPUT); //Initiates Motor Channel A pin
-  pinMode(9, OUTPUT); //Initiates Brake Channel A pin
-  //  AFMS.begin();
-  //  myMotor->setSpeed(10);
+  AFMS.begin();
+  myMotor->setSpeed(10);
 }
 
 void loop() {
@@ -49,14 +45,6 @@ void loop() {
 
 long microsecondsToCentimeters(long microseconds) {
   return microseconds / 29 / 2;
-}
-
-void rotateStepper(int steps, boolean isRev) {
-  if (isRev) {
-    digitalWrite(steps, HIGH);
-  } else {
-    digitalWrite(steps, LOW);
-  }
 }
 
 void playGame() {
@@ -103,7 +91,7 @@ void playGame() {
       twoPressed = true;
       onePressed = false;
       Serial.print("two22222222222222222222222222222222222222\n");
-      rotateStepper(15, true); //1.8 * 15 = 27 degrees
+      myMotor->step(100, FORWARD, DOUBLE);
       //Rotate towards 1
     }
   }
@@ -113,7 +101,7 @@ void playGame() {
       onePressed = true;
       twoPressed = false;
       Serial.print("one111111111111111111111111111111111111\n");
-      rotateStepper(15, false); //1.8 * 15 = 27 degrees
+      myMotor->step(100, BACKWARD, DOUBLE);
       //Rotate towards 2
     }
   }
