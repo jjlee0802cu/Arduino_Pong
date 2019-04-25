@@ -103,7 +103,7 @@ void playGame() {
       twoPressed = true;
       onePressed = false;
       Serial.print("two22222222222222222222222222222222222222\n");
-      rotateStepper(15, true) //1.8 * 15 = 27 degrees
+      rotateStepper(15, true); //1.8 * 15 = 27 degrees
       //Rotate towards 1
     }
   }
@@ -113,7 +113,7 @@ void playGame() {
       onePressed = true;
       twoPressed = false;
       Serial.print("one111111111111111111111111111111111111\n");
-      rotateStepper(15, false) //1.8 * 15 = 27 degrees
+      rotateStepper(15, false); //1.8 * 15 = 27 degrees
       //Rotate towards 2
     }
   }
