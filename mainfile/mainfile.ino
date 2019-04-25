@@ -1,3 +1,5 @@
+#include <Stepper.h>
+
 //#include <Wire.h>
 //#include <Adafruit_MotorShield.h>
 //Adafruit_MotorShield AFMS = Adafruit_MotorShield();
@@ -23,6 +25,8 @@ int userScore2 = 0;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(12, OUTPUT); //Initiates Motor Channel A pin
+  pinMode(9, OUTPUT); //Initiates Brake Channel A pin
 //  AFMS.begin();
 //  myMotor->setSpeed(10);
 }
@@ -37,8 +41,7 @@ void loop() {
 //  Serial.print("single");
 //  myMotor->step(1000, FORWARD, SINGLE);
 //  myMotor->step(1000, BACKWARD, SINGLE);
-
-
+  rotateStepper(1);
   //Ultrasonic
   long duration, inches, cm;
   pinMode(ultraOnePingPin, OUTPUT);
@@ -146,3 +149,8 @@ void loop() {
 long microsecondsToCentimeters(long microseconds) {
   return microseconds / 29 / 2;
 }
+
+void rotateStepper(int steps) {
+    Serial.print("Called MOVE");
+    digitalWrite(60,HIGH);
+  }
