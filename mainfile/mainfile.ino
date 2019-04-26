@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
-Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
 
 int forcePortOne = A1;
@@ -8,7 +8,7 @@ int forcePortTwo = A2;
 boolean onePressed = false;
 boolean twoPressed = false;
 boolean newGamePressed = false;
-int forceThresh = 10; //Decreases this to increase sensitivity
+int forceThresh = 3; //Decreases this to increase sensitivity
 
 const int ultraOnePingPin = 7;
 const int ultraOneEchoPin = 6;
@@ -25,8 +25,10 @@ int winner = 0;
 void setup() {
   Serial.begin(9600);
   AFMS.begin();
-  myMotor->setSpeed(10);
+  myMotor->setSpeed(100);
 }
+
+
 
 void loop() {
   if (isActive) {
@@ -91,7 +93,8 @@ void playGame() {
       twoPressed = true;
       onePressed = false;
       Serial.print("two22222222222222222222222222222222222222\n");
-      myMotor->step(100, FORWARD, DOUBLE);
+        myMotor->step(170, FORWARD, DOUBLE);
+
       //Rotate towards 1
     }
   }
@@ -101,10 +104,11 @@ void playGame() {
       onePressed = true;
       twoPressed = false;
       Serial.print("one111111111111111111111111111111111111\n");
-      myMotor->step(100, BACKWARD, DOUBLE);
+        myMotor->step(140, BACKWARD, DOUBLE);
       //Rotate towards 2
     }
   }
+  
 }
 
 void resetData() {
@@ -124,16 +128,16 @@ void dispScore() {
 }
 
 /*void echoCheck() { // Timer2 interrupt calls this function every 24uS where you can check the ping status.
-// Don't do code here!
-if (sonar.check_timer()) { // This is how you check to see if the ping was received.
-Serial.println("received.");
-// Here's where you can add code.
-Serial.print("Ping: ");
-Serial.print(sonar.ping_result / US_ROUNDTRIP_CM); // Ping returned, uS result in ping_result, convert to cm with US_ROUNDTRIP_CM.
-Serial.println("cm");
-ultraOneSent = false;
-}
-}*/
+  // Don't do code here!
+  if (sonar.check_timer()) { // This is how you check to see if the ping was received.
+  Serial.println("received.");
+  // Here's where you can add code.
+  Serial.print("Ping: ");
+  Serial.print(sonar.ping_result / US_ROUNDTRIP_CM); // Ping returned, uS result in ping_result, convert to cm with US_ROUNDTRIP_CM.
+  Serial.println("cm");
+  ultraOneSent = false;
+  }
+  }*/
 
 /*
     //Stepper Motor
@@ -150,9 +154,9 @@ ultraOneSent = false;
         pinMode(ultraOneEchoPin, INPUT);
         ultraOneSent = true;
       }
-    
+
       Serial.println(digitalRead(ultraOneEchoPin));
-    
+
       if(digitalRead(ultraOneEchoPin) == HIGH){
         Serial.println(1098);
         ultraOneSent = false;
@@ -163,7 +167,7 @@ ultraOneSent = false;
       } else{
         ultraOneSent = true;
         sonar.ping_timer(echoCheck);
-    
+
       }
 
       if (millis() >= pingTimer) {   // pingSpeed milliseconds since last ping, do another ping.
